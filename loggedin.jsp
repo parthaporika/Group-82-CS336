@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import = "appdatabase.*"%>
+    pageEncoding="ISO-8859-1"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 <!DOCTYPE html>
@@ -14,8 +14,8 @@
         	String user = request.getParameter("userName");
         	String pass = request.getParameter("password");
         	PreparedStatement qry1 = con.prepareStatement("SELECT * FROM staff WHERE staff.email = ? AND staff.slogin = ?");
-        	qry1.setString(1, "'" + user + "'");
-        	qry1.setString(2, "'" + pass + "'");
+        	qry1.setString(1, user);
+        	qry1.setString(2, pass);
         	String qry2;
         	ResultSet rset1 = qry1.executeQuery();
         	ResultSet rset2;
@@ -25,15 +25,9 @@
         		rset2 = st.executeQuery(qry2);
         		if (rset1.isBeforeFirst()){
         			loggedin = true;
-        			while(rset2.next()){
-            			out.println("<br>" + rset2.getString("email") + " " + rset1.getString("login") + "</b>");
-            		}
         		}
         	} else {
         		loggedin = true;
-        		while(rset1.next()){
-        			out.println("<br>" + rset1.getString("email") + " " + rset1.getString("slogin") + "</b>");
-        		}
         	}
         	
         	if (loggedin == true){
