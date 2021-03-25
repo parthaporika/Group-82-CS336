@@ -23,7 +23,7 @@
         	if (!rset1.isBeforeFirst()){
         		qry2 = "SELECT * FROM endUser WHERE email = '" + user + "' AND endUser.login = '" + pass + "'";
         		rset2 = st.executeQuery(qry2);
-        		if (rset1.isBeforeFirst()){
+        		if (rset2.isBeforeFirst()){
         			loggedin = true;
         		}
         	} else {
