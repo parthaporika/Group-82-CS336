@@ -9,15 +9,42 @@
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
         String connectionUrl = "jdbc:mysql://localhost:3306/auction";
 		Connection con = DriverManager.getConnection(connectionUrl, "root", "root");
+		HttpSession sess = request.getSession();
 		
         String user = request.getParameter("userName");
         String pass = request.getParameter("password");
+        int isStaff = Integer.parseInt(request.getParameter("isStaff"));
         
-        PreparedStatement newUser = con.prepareStatement("INSERT INTO endUser VALUES (?, true, false, ?)");
-        newUser.setString(1, user);
-        newUser.setString(2, pass);
-         
-        newUser.executeUpdate();
+        if (isStaff == 1){
+        	PreparedStatement newStaff = con.prepareStatement("INSERT INTO staff VALUES (?, ?, null, false)");
+            
+        	newStaff.setString(1, user);
+        	newStaff.setString(2, pass);
+        	
+        	try {
+        		int result = newStaff.executeUpdate();
+        		out.println("<h1>The account for customer rep " + user + " was successfully created</h1>");
+        	} catch (Exception e){
+        		out.println("<h1>There was an issue with creating the account for " + user + " with the password " + pass + "</h1>");
+        	}
+        	
+        	
+        } else {
+        	PreparedStatement newUser = con.prepareStatement("INSERT INTO endUser VALUES (?, true, false, ?)");
+        
+        	newUser.setString(1, user);
+        	newUser.setString(2, pass);
+        	
+        	try {
+        		int result = newUser.executeUpdate();
+        		sess.setAttribute("ACCESS", "rep");
+        		response.sendRedirect("profile.jsp");
+        	} catch (Exception e){
+        		out.println("<h1>There was an issue with creating the account for " + user + " with the password " + pass + "</h1>");
+        	}
+        	
+        	
+        }
         %>
 	</body>
 </html>

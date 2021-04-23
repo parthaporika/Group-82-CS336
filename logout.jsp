@@ -15,6 +15,7 @@
 	String login = (String) sess.getAttribute("LOGIN");
 	if (login != null){
 		sess.setAttribute("LOGIN", null);
+		sess.setAttribute("ACCESS", null);
 		response.sendRedirect("login.html");
 	} else {
 		out.println("<b>You are already logged out</b>");
