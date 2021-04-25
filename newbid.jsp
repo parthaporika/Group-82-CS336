@@ -36,8 +36,8 @@
 	        String qry4 = "SELECT bidamount FROM bids WHERE auction_number = " + auctionnum + " AND login = "+login+"";
 			ResultSet rset4 = st3.executeQuery(qry4);
 			if (rset4.isBeforeFirst()){
-				PreparedStatement update = con.prepareStatement("UPDATE bids SET bidamount = " + bidamount +" WHERE auction_number = "+ auctionnum + " AND login = "+login+"");
-		        update.executeUpdate();
+				PreparedStatement update1 = con.prepareStatement("UPDATE bids SET bidamount = " + bidamount +" WHERE auction_number = "+ auctionnum + " AND login = "+login+"");
+		        update1.executeUpdate();
 			}else{
 				PreparedStatement newBid = con.prepareStatement("INSERT INTO bids VALUES (0, ?, ?, false, ?, 0)");
 		        newBid.setString(1, login);
