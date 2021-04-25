@@ -48,14 +48,16 @@
         		}
         	
         		if (loggedin == true){
-        			sess.setAttribute("LOGIN", pass);
         			String redirect = (String) sess.getAttribute("ACCESS");
         			
         			if (redirect.equals("rep")){
+        				sess.setAttribute("LOGIN", user);
         				response.sendRedirect("customer-rep.jsp");
         			} else if (redirect.equals("admin")){
+        				sess.setAttribute("LOGIN", user);
         				response.sendRedirect("admin.jsp");
         			} else {
+        				sess.setAttribute("LOGIN", pass);
         				response.sendRedirect("profile.jsp");
         			}
         		} else {

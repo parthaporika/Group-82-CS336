@@ -25,7 +25,7 @@
         		int result = newStaff.executeUpdate();
         		out.println("<h1>The account for customer rep " + user + " was successfully created</h1>");
         		sess.setAttribute("ACCESS", "rep");
-        		sess.setAttribute("LOGIN", pass);
+        		sess.setAttribute("LOGIN", user);
         	} catch (Exception e){
         		out.println("<h1>There was an issue with creating the account for " + user + " with the password " + pass + "</h1>");
         	}
