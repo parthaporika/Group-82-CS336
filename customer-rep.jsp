@@ -29,7 +29,7 @@
         	<br>
         <p> Browse Questions </p>
 		<button class="button button1" type="submit">Browse</button>
-		</form>
+	</form>
 
 
 <h2> Edit Account info </h2>
@@ -83,7 +83,36 @@
 	<div class="divider"></div>
 
 
-<br>
+<h3> Delete Auction</h3>
+<p> Warning: Once an auction is deleted it can not be undone. Please proceed with caution </p>
+
+	<form action = 'delete-auction.jsp' method = 'post'>
+		<div class="textbox">
+				<input type="text" placeholder="Auction Number" name="auctnum" value="">
+			</div>
+
+ <input name="btn" type="submit" value="Delete">
+		<div class="divider"></div>
+		</form>
+
+<h3> Delete Bid</h3>
+<p> Warning: Once a bid is deleted it can not be undone. Please proceed with caution </p>
+
+	<form action = 'delete-bid.jsp' method = 'post'>
+		<div class="textbox">
+				<input type="text" placeholder="Auction Number" name="auctnum" value="">
+			</div>
+		<div class="textbox">
+				<input type="text" placeholder="Login Info" name="userName" value="">
+		</div>
+	
+        
+
+ <input name="btn" type="submit" value="Delete">
+		<div class="divider"></div>
+		</form>
+
+
 
 <form action = 'logout.jsp' method = 'post'>
 	<input name='btn' type='submit' value='Log Out'>
