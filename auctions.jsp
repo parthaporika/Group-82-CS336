@@ -11,6 +11,7 @@
 %>
 </head>
 	<body>
+	
 	<% 
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
         String connectionUrl = "jdbc:mysql://localhost:3306/auction";
@@ -87,8 +88,10 @@
 			}
 		
 		} else {
-			out.println("<input id = 'bid' name='btn' type='submit' value='Make Automatic Bid'><script type='text/javascript'>document.getElementById('bid').onclick = function () { location.href = 'automatic-bidding.html';};</script>");
+			out.println("<input id = 'bid' name='btn' type='submit' value='Make Automatic Bid'><input type = 'hidden' name = 'auctNum' value = '" + auctNum + "'><script type='text/javascript'>document.getElementById('bid').onclick = function () { location.href = 'automatic-bidding.html';};</script>");
 		}
+		
+		out.println("<form action = 'auction-history.jsp' method = 'post'> <input type = 'hidden' name = 'auctNum' value = '" + auctNum + "'<input name = 'btn' type = 'submit' value = 'View Auction History'></form>");
 		
 		PreparedStatement similarQry = con.prepareStatement("SELECT DISTINCT e.item_name, e.auction_number, IF (isSold = '1', 'SOLD', e.current_price) AS Current_Bid FROM electronics e, posts p WHERE p.auction_number = e.auction_number AND (e.brand = ? OR e.model = ?) AND e.auction_number NOT in (SELECT auction_number FROM electronics WHERE auction_number = ?)");
 		similarQry.setString(1, brand);
@@ -109,5 +112,15 @@
 		}
 		
         %>
+        
+    <input id = 'manual' name='btn' type='submit' value='Make Manual Bid'>
+    
+    <p>Warning: Once you have made a bid, you cannot change its bid type.</p>
+	
+	<script type="text/javascript">
+    	document.getElementById("browse").onclick = function () {
+        	location.href = "newbid.html";
+    	};
+	</script>
 	</body>
 </html>

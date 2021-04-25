@@ -65,7 +65,7 @@
 		}
 		out.println("</table>");
 	} else {
-		out.println("<b>" + itemType + " does not exist</b>"); 
+		out.println("<b>" + itemName + " does not exist</b>"); 
 	}
 	
 %>
