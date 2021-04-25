@@ -2,9 +2,6 @@
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
-<%@ page import="java.util.Date" %>
-<%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="java.text.DateFormat" %>
 
 <!DOCTYPE html>
 <html>
@@ -15,6 +12,7 @@
 		Connection con = DriverManager.getConnection(connectionUrl, "root", "Garethbale11");
 		
 		String datetime = request.getParameter("closingtime");
+		System.out.println(datetime);
         float minprice = Float.parseFloat(request.getParameter("minprice"));
         String brand = request.getParameter("brand");
         String color = request.getParameter("color");
@@ -47,6 +45,7 @@
 	    Statement st1 = con.createStatement();
         String qry3 = "SELECT MAX(auction_number) FROM posts";
 		ResultSet rset1 = st1.executeQuery(qry3);
+		rset1.next();
 		int curnum = rset1.getInt("MAX(auction_number)");
         int nextnum = curnum+1;
         java.sql.Date sqlDate = java.sql.Date.valueOf(datetime);
@@ -55,7 +54,7 @@
         newPost.setString(1, "empty");
         newPost.setDate(2, sqlDate);
         newPost.setFloat(3, minprice);
-        newPost.setString(4, login);
+        newPost.setString(4, "partha");
         newPost.setInt(5, nextnum);
          
         newPost.executeUpdate();
