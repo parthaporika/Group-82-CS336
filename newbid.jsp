@@ -32,12 +32,20 @@
 		if (lowbound+currbid > bidamount){
 			out.println("Bid has to be greater than or equal to" + lowbound+currbid+"");
 		}else{
-	        PreparedStatement newBid = con.prepareStatement("INSERT INTO bids VALUES (0, ?, ?, false, ?, 0)");
-	        newBid.setString(1, login);
-	        newBid.setInt(2, auctionnum);
-	        newBid.setFloat(3, bidamount);
-	         
-	        newBid.executeUpdate();
+			Statement st3 = con.createStatement();
+	        String qry4 = "SELECT bidamount FROM bids WHERE auction_number = " + auctionnum + " AND login = "+login+"";
+			ResultSet rset4 = st3.executeQuery(qry4);
+			if (rset4.isBeforeFirst()){
+				PreparedStatement update = con.prepareStatement("UPDATE bids SET bidamount = " + bidamount +" WHERE auction_number = "+ auctionnum + " AND login = "+login+"");
+		        update.executeUpdate();
+			}else{
+				PreparedStatement newBid = con.prepareStatement("INSERT INTO bids VALUES (0, ?, ?, false, ?, 0)");
+		        newBid.setString(1, login);
+		        newBid.setInt(2, auctionnum);
+		        newBid.setFloat(3, bidamount);
+		         
+		        newBid.executeUpdate();
+			}
 	        
 	        PreparedStatement update = con.prepareStatement("UPDATE electronics SET current_price = " + bidamount +" WHERE auction_number = "+ auctionnum + "");
 	        update.executeUpdate();
@@ -54,6 +62,7 @@
 	        newBidHist.setFloat(4, bidamount);
 	        
 	        newBidHist.executeUpdate();
+	        out.println("Your bid was entered!");
 		}
         %>
 	</body>

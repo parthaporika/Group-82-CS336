@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
+<%@ page import="java.sql.*" %>
 
 <!DOCTYPE html>
 <html>
@@ -11,7 +12,7 @@
         String connectionUrl = "jdbc:mysql://127.0.0.1:3306/auction";
 		Connection con = DriverManager.getConnection(connectionUrl, "root", "Garethbale11");
 		
-		String datetime = request.getParameter("closingtime");
+		String datetime = request.getParameter("closingdate");
 		System.out.println(datetime);
         float minprice = Float.parseFloat(request.getParameter("minprice"));
         String brand = request.getParameter("brand");
@@ -48,13 +49,13 @@
 		rset1.next();
 		int curnum = rset1.getInt("MAX(auction_number)");
         int nextnum = curnum+1;
-        java.sql.Date sqlDate = java.sql.Date.valueOf(datetime);
+        Timestamp ts = Timestamp.valueOf(datetime);
         
         PreparedStatement newPost = con.prepareStatement("INSERT INTO posts VALUES (?, ?, ?, ?, ?)");
-        newPost.setString(1, "empty");
-        newPost.setDate(2, sqlDate);
+        newPost.setDate(1, null);
+        newPost.setTimestamp(2, ts);
         newPost.setFloat(3, minprice);
-        newPost.setString(4, "partha");
+        newPost.setString(4, login);
         newPost.setInt(5, nextnum);
          
         newPost.executeUpdate();
@@ -80,6 +81,7 @@
         newElec.setBoolean(18, isspeaker);
         
         newElec.executeUpdate();
+        out.println("New Post Added!");
         %>
 	</body>
 </html>
