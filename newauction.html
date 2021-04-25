@@ -12,12 +12,17 @@
 		<form>
 
 			<div class="datebox">
-				<label for="closingtime">Auction Closing Date and Time:</label>
-  				<input type="datetime-local" id="closingtime" name="closingtime" value="">
+				<label for="closingdate">Auction Closing Date:</label>
+  				<input type="date" id="closingdate" name="closingdate" value="">
+			</div>
+			<br>
+			<div class="timebox">
+				<label for="closingtime">Auction Closing Time:</label>
+  				<input type="time" id="closingtime" name="closingtime" value="">
 			</div>
 
 			<div class="textbox">
-				<input type="number" placeholder="Minimum Selling Price" name="minprice" value="">
+				<input type="text" placeholder="Minimum Selling Price" name="minprice" value="">
 			</div>
 
 			<div class="textbox">
@@ -71,7 +76,17 @@
 			<div class="textbox">
 				<input type="text" placeholder="Frequency" name="frequency" value="">
 			</div>
-
+			
+			<div>
+				<p>Please select your device type:</p>
+				<input type="radio" id="computer" name="device" value="computer">
+				<label for="computer">Computer</label><br>
+				<input type="radio" id="camera" name="device" value="camera">
+				<label for="camera">Camera</label><br>
+				<input type="radio" id="speaker" name="device" value="speaker">
+				<label for="speaker">Speaker</label>
+			</div>
+			
 			<br>
 			<input name="subbtn" type="submit" name="" value="Submit">
 
