@@ -81,5 +81,9 @@ if (access != "admin"){
 		</form>
 
 	</div>
+	
+<form action = 'logout.jsp' method = 'post'>
+	<input name='btn' type='submit' value='Log Out'>
+</form>
 </body>
 </html>

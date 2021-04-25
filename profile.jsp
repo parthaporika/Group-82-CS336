@@ -8,12 +8,26 @@
 </head>
 <body>
 
-<!--<form action = 'messages.jsp' method = 'post'>
+<input id = 'browse' name='btn' type='submit' value='Browse'>
+
+
+<form action = 'messages.jsp' method = 'post'>
 	<input name='btn' type='submit' value='Messages'>
-</form>-->
+</form>
+
+<form action = 'q-and-a.jsp' method = 'post'>
+	<input name='btn' type='submit' value='Q & A'>
+</form>
+
 <form action = 'logout.jsp' method = 'post'>
 	<input name='btn' type='submit' value='Log Out'>
 </form>
+
+<script type="text/javascript">
+    document.getElementById("browse").onclick = function () {
+        location.href = "browse.html";
+    };
+</script>
 
 </body>
 </html>

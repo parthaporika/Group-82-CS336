@@ -38,7 +38,7 @@
         			//add staff indicator and whether or not that staff is an admin indicator for the session
         			loggedin = true;
         			while (rset1.next()){
-            			if (rset1.getString("isAdmin") == "0"){
+            			if (rset1.getString("isAdmin").equals("0")){
             				sess.setAttribute("ACCESS", "rep");
             			} else {
             				sess.setAttribute("ACCESS", "admin");
@@ -50,9 +50,10 @@
         		if (loggedin == true){
         			sess.setAttribute("LOGIN", pass);
         			String redirect = (String) sess.getAttribute("ACCESS");
-        			if (redirect == "rep"){
+        			
+        			if (redirect.equals("rep")){
         				response.sendRedirect("customer-rep.jsp");
-        			} else if (redirect == "admin"){
+        			} else if (redirect.equals("admin")){
         				response.sendRedirect("admin.jsp");
         			} else {
         				response.sendRedirect("profile.jsp");

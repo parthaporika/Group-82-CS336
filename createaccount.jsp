@@ -24,6 +24,8 @@
         	try {
         		int result = newStaff.executeUpdate();
         		out.println("<h1>The account for customer rep " + user + " was successfully created</h1>");
+        		sess.setAttribute("ACCESS", "rep");
+        		sess.setAttribute("LOGIN", pass);
         	} catch (Exception e){
         		out.println("<h1>There was an issue with creating the account for " + user + " with the password " + pass + "</h1>");
         	}
@@ -37,7 +39,8 @@
         	
         	try {
         		int result = newUser.executeUpdate();
-        		sess.setAttribute("ACCESS", "rep");
+        		sess.setAttribute("ACCESS", "user");
+        		sess.setAttribute("LOGIN", pass);
         		response.sendRedirect("profile.jsp");
         	} catch (Exception e){
         		out.println("<h1>There was an issue with creating the account for " + user + " with the password " + pass + "</h1>");
